@@ -26,10 +26,59 @@ public class Polynomial {
 		Scanner Reader;
 		Reader = new Scanner(f);
 		String str = Reader.nextLine();
-		String [] values = str.split("x|\\+|-");
+		String [] terms = str.split("x-[0-9]|\\+|-");
 		String [] signs = str.split("x|[0-9]");
 		
-		int polydegree = Integer.parseInt(values[values.length - 1]);
+		int num_terms = terms.length;
+		
+		/*System.out.println("num_terms");
+		for (int i = 0; i < terms.length; i++) {
+			System.out.println(terms[i]);
+		}
+		System.out.println(num_terms);*/
+		
+		double[] coff = new double[num_terms];
+		int[] exp = new int[num_terms];
+		
+		
+		String [] values = str.split("\\+|-");
+		int coff_index = 0;
+		int exp_index = 0;
+		for (int a = 0; a < values.length; a++) {
+			/*System.out.println(values[a]);*/
+			if (values[a].contains("x")) {
+				if (values[a].split("x")[0].contains("-")) {
+					coff[coff_index] = -1 * Double.parseDouble(values[a].split("x")[0].substring(1, values[a].split("x")[0].length()));
+				} else {
+					coff[coff_index] = Double.parseDouble(values[a].split("x")[0]);
+				}
+				coff_index = coff_index + 1;
+				
+				if (values[a].split("x")[1].contains("-")) {
+					exp[exp_index] = -1 * Integer.parseInt(values[a].split("x")[1].substring(1, values[a].split("x")[1].length()));
+				} else {
+					exp[exp_index] = Integer.parseInt(values[a].split("x")[1]);
+				}
+				exp_index = exp_index + 1;
+				
+			} else {
+				if (values[a].contains("-")) {
+					coff[coff_index] = -1 * Double.parseDouble(values[a].substring(1, values[a].length()));
+				} else {
+					coff[coff_index] = Double.parseDouble(values[a]);
+				}
+				coff_index = coff_index + 1;
+				
+				exp[exp_index] = 0;
+				exp_index = exp_index + 1;
+			}
+		}
+		
+		coefficients = coff;
+		exponents = exp;
+		
+		
+		/*int polydegree = Integer.parseInt(values[values.length - 1]);
 		
 		double[] coff = new double[polydegree + 1];
 		int[] exp = new int[polydegree + 1];
@@ -54,10 +103,11 @@ public class Polynomial {
 				coff[Integer.parseInt(values[i])] = cv;
 			}
 		} 
+		
 			
 		
 		coefficients = coff;
-		exponents = exp;
+		exponents = exp;*/
 	}
     
 	

@@ -3,6 +3,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.Arrays;
 
 public class Driver {
 	public static void main(String [] args) throws Exception {
@@ -30,6 +31,9 @@ public class Driver {
 		//s2.saveToFile(f);
 		
 		Polynomial s3 = p = new Polynomial(f);
+		
+		System.out.println(Arrays.toString(s3.coefficients));
+		System.out.println(Arrays.toString(s3.exponents));
 		
 
 	}
